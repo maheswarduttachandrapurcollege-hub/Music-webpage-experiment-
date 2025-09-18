@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Vibe — Taste Your Tune (Audio Only)</title>
+  <!-- Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googleapis.com">
+  <link rel="preconnect" href="https://www.youtube.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  
+  <!-- Load only essential font weights -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="top-nav">
+      <div class="nav-left">
+        <h1 class="brand">My Vibe</h1>
+        <p class="tagline">Taste Your Tune - Audio Only</p>
+      </div>
+      <div class="nav-right">
+        <button class="nav-btn active" data-tab="home">Home</button>
+        <button class="nav-btn" data-tab="about">About</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Home Tab -->
+  <div id="tab-home" class="tab-content active">
+    <section class="music-box">
+      <div class="now-playing">
+        <img id="song-thumbnail" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTYiIGZpbGw9IiMxZjE2NDQiLz4KPHN2ZyB4PSIyNCIgeT0iMjQiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj4KPHBhdGggZD0iTTkgMTJWN0E1IDUgMCAwIDEgMTkgN1YxMiIgc3Ryb2tlPSIjZjdjOTQ4IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNOSAxMlYxN0E1IDUgMCAwIDAgMTkgMTdWMTIiIHN0cm9rZT0iI2Y3Yzk0OCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="Cover" class="cover" />
+        <div class="meta">
+          <div class="label">Now Playing (Audio Only)</div>
+          <h2 id="song-title">Pick a track or search below</h2>
+        </div>
+      </div>
+      
+      <!-- Audio Controls -->
+      <div class="audio-controls">
+        <button class="control-btn" onclick="playPrevious()" title="Previous">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <polygon points="19,20 9,12 19,4" fill="currentColor"/>
+            <line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+        
+        <button class="control-btn play-btn" onclick="togglePlayback()" title="Play/Pause">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+          </svg>
+        </button>
+        
+        <button class="control-btn" onclick="playNext()" title="Next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <polygon points="5,4 15,12 5,20" fill="currentColor"/>
+            <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Hidden video player for audio-only -->
+      <div class="player-frame" style="display: none;">
+        <div class="iframe-wrap">
+          <div id="yt-player"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-area">
+      <div class="search-bar">
+        <input id="search" type="text" placeholder="Search songs, artists... (Audio Only)" autocomplete="off" />
+        <button id="search-btn">Search</button>
+      </div>
+    </section>
+
+    <main>
+      <div id="results" class="grid"></div>
+    </main>
+  </div>
+
+  <!-- About Tab -->
+  <div id="tab-about" class="tab-content">
+    <section class="about-section">
+      <h2>About My Vibe (Audio Only)</h2>
+      <p>A fast, lightweight audio streaming platform powered by YouTube. Search and play millions of songs instantly without video - perfect for background listening!</p>
+      
+      <div class="features">
+        <h3>Features:</h3>
+        <ul>
+          <li>🎵 Audio-only playback (no video)</li>
+          <li>📱 Perfect for background listening</li>
+          <li>⚡ Ultra-fast performance</li>
+          <li>🔄 Automatic quality optimization</li>
+          <li>⌨️ Keyboard shortcuts (Space, Arrow keys)</li>
+        </ul>
+      </div>
+      
+      <div class="feedback-section">
+        <h3>Quick Feedback</h3>
+        <form id="feedback-form">
+          <input type="text" placeholder="Your feedback about audio-only mode..." required>
+          <button type="submit">Send</button>
+        </form>
+        <p id="feedback-status"></p>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <small>Powered by YouTube API • Created by Mahes • Audio-Only Mode</small>
+  </footer>
+
+  <!-- Load YouTube API asynchronously -->
+  <script>
+    // Load YouTube API only when needed
+    let ytApiLoaded = false;
+    function loadYouTubeAPI() {
+      if (ytApiLoaded) return;
+      ytApiLoaded = true;
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    
+    // Load after a short delay to prioritize initial render
+    setTimeout(loadYouTubeAPI, 300);
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

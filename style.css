@@ -1,0 +1,367 @@
+/* Audio-Only Player Styles - ADD THIS TO YOUR EXISTING style.css */
+
+/* Hide video player completely */
+.player-frame {
+  display: none !important;
+}
+
+.iframe-wrap {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Enhanced Music Box for Audio-Only */
+.music-box {
+  width: min(1100px, 95%);
+  margin: 0 auto 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px;
+  contain: layout style;
+  transform: translateZ(0);
+}
+
+.now-playing {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cover {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--bg2);
+  border: 2px solid rgba(247,201,72,0.3);
+  flex-shrink: 0;
+  image-rendering: optimizeSpeed;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.meta .label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+#song-title {
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* Audio Control Bar */
+.audio-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-top: 16px;
+}
+
+.control-btn {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  outline: none;
+  width: 48px;
+  height: 48px;
+}
+
+.control-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--accent);
+}
+
+.play-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--bg1);
+  padding: 16px;
+  margin: 0 8px;
+  transform: scale(1.1);
+  width: 56px;
+  height: 56px;
+}
+
+.play-btn:hover {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  transform: scale(1.15);
+}
+
+/* Enhanced Cards for Audio-Only */
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  contain: layout style;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(247,201,72,0.3);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.card.playing {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(247,201,72,0.3);
+}
+
+.card.playing::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(247,201,72,0.1), rgba(155,92,255,0.1));
+  pointer-events: none;
+}
+
+/* Card Overlay with Play Button */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+
+.card:hover .card-overlay,
+.card.playing .card-overlay {
+  opacity: 1;
+}
+
+.play-icon {
+  font-size: 32px;
+  color: var(--accent);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.card.playing .play-icon {
+  animation: none;
+}
+
+/* Audio Badge */
+.audio-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(247,201,72,0.2);
+  color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Background Playback Notification - Updated */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 320px;
+  background: linear-gradient(135deg, #1a1036, #2d1b69);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  transform: translateX(0);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation: slideIn 0.4s ease-out;
+}
+
+.notification.hidden {
+  transform: translateX(400px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+}
+
+.notification-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  animation: bounce 1s ease-in-out infinite alternate;
+}
+
+.notification-text {
+  flex: 1;
+}
+
+.notification-text strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.notification-text p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.8;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.notification-close:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--accent);
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+/* Mobile responsive updates */
+@media (max-width: 768px) {
+  .now-playing {
+    gap: 12px;
+  }
+  
+  .cover {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .audio-controls {
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+  }
+  
+  .play-btn {
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+  }
+  
+  .play-icon {
+    font-size: 24px;
+  }
+  
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+  
+  .notification-content {
+    padding: 12px;
+  }
+  
+  .notification-icon {
+    font-size: 20px;
+  }
+  
+  .notification-text strong {
+    font-size: 13px;
+  }
+  
+  .notification-text p {
+    font-size: 11px;
+  }
+}
